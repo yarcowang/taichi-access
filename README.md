@@ -1,6 +1,6 @@
 Taichi Access
 =============
-Taichi Access is a simple access control system following \*nix like system style.
+Taichi Access is a simple access control module for node.js following \*nix like system style.
 
 Simple Tutorial
 ---------------
@@ -51,6 +51,12 @@ access.user = visiter;
 access.check('delete', resource); 
 access.check('read', resource);
 ```
+
+How to install
+---------------
+Like other module in node.js, just do:
+
+		npm install taichi-access
 
 Interface
 ----------
