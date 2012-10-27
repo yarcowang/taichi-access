@@ -67,6 +67,7 @@ Interface
 * Methods
 	* check(permission, resource) -- check permission on some resource
 	* checkUser(permission, user, resource) -- check permission on some resource for someone
+	* setAnonymous()(req, res, next) -- set anonymous user for expressjs
 
 Notice
 --------
