@@ -50,6 +50,8 @@ access.checkUser('read', visiter, resource); // true, cause everyone = read is s
 access.user = visiter;
 access.check('delete', resource); 
 access.check('read', resource);
+
+var user = access.anonymous(); // set user as anonymous
 ```
 
 How to install
@@ -67,7 +69,7 @@ Interface
 * Methods
 	* check(permission, resource) -- check permission on some resource
 	* checkUser(permission, user, resource) -- check permission on some resource for someone
-	* setAnonymous()(req, res, next) -- set anonymous user for expressjs
+	* anonymous() -- get an anonymous user for checking in the small system
 
 Notice
 --------
