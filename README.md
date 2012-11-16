@@ -2,6 +2,8 @@ Taichi Access
 =============
 Taichi Access is a simple access control module for node.js following \*nix like system style.
 
+**This project is under GPL/BSD**
+
 Simple Tutorial
 ---------------
 If you have a blog system, you may several users, for example: admin, bloger, visiter. They are exactly roles for grouping users. So let's define several users in json format:
@@ -30,9 +32,9 @@ Now we could use our **Taichi Access** module to check the permission on those a
 var access = require('taichi-access');
 
 access.id = 'id'; // this indicate the key word is 'id', if you are using something like {_id:1}, then it should be _id
-access.rules = [
+access.setRules([
 	{id:1, type:'blog', permissions:{everyone:'read'}}
-];
+]);
 
 var admin = {id:1, name:'yarco', roles:['admin']};
 var bloger = {id:2, name:'a dog', roles:['blog']};
@@ -65,8 +67,9 @@ Interface
 * Getter/Setter
 	* id -- set/get the key name
 	* user -- set/get the user you want to check
-	* rules -- set/get access rules
+	* rules -- get rules
 * Methods
+    * setRules(rules) -- set access rules
 	* check(permission, resource) -- check permission on some resource
 	* checkUser(permission, user, resource) -- check permission on some resource for someone
 	* anonymous() -- get an anonymous user for checking in the small system
@@ -76,17 +79,19 @@ Notice
 * You could only set one rule for one resource type
 * resource type == role name except three predefined role names: "guest", "user", "admin"
 
+ChangeLog
+---------
+* 0.0.1 - 0.0.2
+  * modern js style
+  * setRules(xxx) intead of .rules=xxx
+
 About Author
 ------------
-I'm Yarco, from China.
-A Sr. PHPer, begin to learn Node.js.
+You could contact <yarco.wang@gmail.com> for this extension.
+Or for programming related things, whatever.
 
-* Name: Yarco (Jun Wong)
-* Timezone: GMT/UTC +08:00
-* Skype: yarco_wang
-* Related Links: [Home Page][homepage] [Linkedin][yco_at_linkedin] [Freelancer][yco_at_freelancer] [Github][yco_at_github]
+This guy currently works in Wiredcraft.com. So you could also get him by <yarco@wiredcraft.com>
 
-[homepage]:http://bbish.net
-[yco_at_linkedin]:http://www.linkedin.com/in/yarcowang
-[yco_at_freelancer]:http://www.freelancer.com/u/yarco.html
-[yco_at_github]:https://github.com/yarcowang
+All rights reserved by [yarco].
+
+[yarco]:http://bbish.net

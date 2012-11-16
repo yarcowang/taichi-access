@@ -19,7 +19,7 @@ var rules = [
 
 describe('Access', function() {
 	access.id = 'id';
-	access.rules = rules;
+	access.setRules(rules);
 
 	describe('id', function() {
 		it('should return id after you set id to id', function() {
