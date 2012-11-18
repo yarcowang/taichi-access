@@ -1,30 +1,37 @@
 Taichi Access
 =============
-Taichi Access is a simple access control module for node.js following \*nix like system style.
+Taichi Access is a simple access control module for nodejs following \*nix like system style.
 
-**This project is under GPL/BSD**
+**License: This project is under GPL/BSD**
 
 Simple Tutorial
 ---------------
-If you have a blog system, you may several users, for example: admin, bloger, visiter. They are exactly roles for grouping users. So let's define several users in json format:
+If you have a blog system, you may have several users, for example: admin, bloger, and those who visit your blog system -- visiter. They are exactly roles for grouping users. Let's define several users in json format:
 
-		{id:1, name:'yarco', roles:['admin']}
-		{id:2, name:'a dog', roles:['blog']}
-		{id:0, name:'anonymous', roles:['guest']}
+```
+{id:1, name:'yarco', roles:['admin']}
+{id:2, name:'a dog', roles:['blog']}
+{id:0, name:'anonymous', roles:['guest']}
+```
 
 Now we have three guys (or maybe two guys with a dog). yarco(me) is an admin, 'a dog' is a bloger and anonymous is a visiter.  
-We don't care about how/where those data comes from, but in our access control system, user must has two fields: **id** and **roles**.
+We don't care about how/where those data comes from, but in our access control system, `user` must has two fields: **id** and **roles**.
 
-Let's go on defining our resource -- blog:
+Let's go on defining our resource -- the blog:
 
-		{id:1000, type:'blog', title:'i\'m a good dog', owner: {id:2}}
+```
+{id:1000, type:'blog', title:'i\'m a good dog', owner: {id:2}}
+```
 
 See, the dog bloger write his first article. Let's say he is the owner of that article.  
-A resource must also has two fields: **type** and **owner**.  
+A `resource` must also has two fields: **type** and **owner**.  
+_notice: we said something in normal case. `user` resource and system resource are not in this case._
 
 Finally, we need to define our permission rules.
 
-		{id:1, type:'blog', permissions:{everyone:'read'}}
+```
+{id:1, type:'blog', permissions:{everyone:'read'}}
+``` 
 
 Now we could use our **Taichi Access** module to check the permission on those above guys.
 
@@ -60,7 +67,9 @@ How to install
 ---------------
 Like other module in node.js, just do:
 
-		npm install taichi-access
+```
+npm install taichi-access
+```
 
 Interface
 ----------
@@ -74,24 +83,31 @@ Interface
 	* checkUser(permission, user, resource) -- check permission on some resource for someone
 	* anonymous() -- get an anonymous user for checking in the small system
 
-Notice
---------
+Extra notice
+--------------
 * You could only set one rule for one resource type
-* resource type == role name except three predefined role names: "guest", "user", "admin"
+* resource type equal to role name except the following three predefined roles: **guest**, **user**, **admin**
+* special resources may don't have the fields: **type**, **owner**. they can be read by **everyone**, and can only be modified by users with **admin** role. Type of those resources is **system**, you dont need to define the field.(for example, access rule table itself)
+* special resource `users` only has one field: **type**, and   the value is fixed to **users**. cause user himself is the owner of him, you don't need to define an extra field **owner**
+* `admin` role default has full permission on everything
+* `user` role default has read permission on everything
+* set a rule on some resource `{type:'xxxx', permissions:{everyone:'read'}}` could make the resource public read to everyone
 
 ChangeLog
 ---------
+* 0.0.2 - 0.0.3
+  * add check on `system` resource type (if a resource doest set a `type` field, the resource will have `system` type which is readable to everyone and writable only to admin)
 * 0.0.1 - 0.0.2
   * modern js style
   * setRules(xxx) intead of .rules=xxx
 
-About Author
-------------
-You could contact <yarco.wang@gmail.com> for this extension.
+Sugguestion
+-----------
+You could contact [me][] through <yarco.wang@gmail.com> for this extension.
 Or for programming related things, whatever.
 
 This guy currently works in Wiredcraft.com. So you could also get him by <yarco@wiredcraft.com>
 
-All rights reserved by [yarco].
+All rights reserved.
 
-[yarco]:http://bbish.net
+[me]:http://bbish.net
