@@ -1,13 +1,14 @@
 {
   "name": "taichi-access",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a simple access control system for node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
 	"dependencies": {
-		"debug": "*"
+		"debug": "*",
+		"underscore": "*"
 	},
 	"devDependencies": {
 		"mocha": "*",

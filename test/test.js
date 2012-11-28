@@ -12,6 +12,7 @@ var resource = {id:10001, type:'unknown', owner: {id: 1}};
 var resource_a = {id:10002, type:'blog', owner: {id: 3}};
 var resource_b = {id:10003, type:'news', owner: {id:1}};
 var resource_s = {id:10004}; // no type, no owner, system resource
+var resource_4c = {type:'blog', owner: {id:-1}}; // for creation
 
 var rules = [
 	{type: 'blog', permissions: {}},
@@ -49,6 +50,7 @@ describe('Access', function() {
 			access.checkUser('delete', admin, resource_s).should.be.ok;
 			access.checkUser('write', admin, resource_s).should.be.ok;
 			access.checkUser('read', admin, resource_s).should.be.ok;
+			access.checkUser('write', admin, resource_4c).should.be.ok;
 		});
 
 		it('should not ok when user is not admin', function() {
@@ -61,6 +63,7 @@ describe('Access', function() {
 			access.checkUser('delete', bloger, resource_a).should.not.be.ok;
 			access.checkUser('write', bloger, resource_a).should.be.ok;
 			access.checkUser('read', bloger, resource_a).should.be.ok;
+			access.checkUser('write', bloger, resource_4c).should.be.ok;
 		});
 
 		it('owner should have full permission on owner resource', function() {
